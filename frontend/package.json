@@ -1,0 +1,43 @@
+{
+  "name": "quasar-frontend",
+  "version": "1.0.0",
+  "description": "Quasar SSR Frontend Application",
+  "productName": "Laravel Quasar App",
+  "author": "Mikhail Peretyatko",
+  "private": true,
+  "scripts": {
+    "dev": "node_modules/.bin/quasar dev -m spa",
+    "build": "node_modules/.bin/quasar build -m spa",
+    "serve": "npx serve dist/spa -l 9000 --no-clipboard --single",
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "@quasar/app-vite": "^1.7.3",
+    "@quasar/extras": "^1.16.9",
+    "@types/node": "^20.11.5",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "autoprefixer": "^10.4.17",
+    "axios": "^1.6.5",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-vue": "^9.20.1",
+    "pinia": "^2.1.7",
+    "prettier": "^3.2.4",
+    "quasar": "^2.14.1",
+    "serve": "^14.2.1",
+    "typescript": "~5.3.3",
+    "vue": "^3.4.15",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">= 8.19.0",
+    "yarn": ">= 1.21.1"
+  }
+}

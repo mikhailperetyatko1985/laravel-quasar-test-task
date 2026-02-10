@@ -1,0 +1,12 @@
+/var/www/html/storage/logs/*.log {
+    daily
+    rotate 30
+    missingok
+    notifempty
+    compress
+    delaycompress
+    dateext
+    dateformat -%Y-%m-%d
+    copytruncate
+    su www-data www-data
+}

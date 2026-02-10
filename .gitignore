@@ -1,0 +1,89 @@
+# Environment files
+.env
+.env.backup
+.env.local
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Docker volumes and data
+mysql/logs/
+nginx/logs/
+api/logs/
+api/storage/logs/
+frontend/logs/
+certbot/logs/
+
+# SSL certificates and certbot config
+certbot/conf/
+certbot/www/
+certbot/.env
+certbot/.env.backup
+
+# Laravel
+api/vendor/
+api/node_modules/
+api/.env
+api/.env.backup
+api/storage/*.key
+api/storage/framework/cache/
+api/storage/framework/sessions/
+api/storage/framework/testing/
+api/storage/framework/views/
+api/storage/logs/
+api/bootstrap/cache/*
+api/public/storage
+api/public/hot
+api/**/*.DS_Store
+
+# MySQL
+mysql/.env
+mysql/.env.backup
+
+# Quasar Frontend
+frontend/node_modules/
+frontend/.quasar/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+#  npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

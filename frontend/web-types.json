@@ -1,0 +1,224 @@
+{
+  "$schema": "http://json.schemastore.org/web-types",
+  "framework": "vue",
+  "name": "quasar",
+  "version": "2.0.0",
+  "contributions": {
+    "html": {
+      "types-syntax": "typescript",
+      "description-markup": "markdown",
+      "tags": [
+        {
+          "name": "q-page",
+          "source": {
+            "module": "quasar",
+            "symbol": "QPage"
+          }
+        },
+        {
+          "name": "q-card",
+          "source": {
+            "module": "quasar",
+            "symbol": "QCard"
+          }
+        },
+        {
+          "name": "q-card-section",
+          "source": {
+            "module": "quasar",
+            "symbol": "QCardSection"
+          }
+        },
+        {
+          "name": "q-card-actions",
+          "source": {
+            "module": "quasar",
+            "symbol": "QCardActions"
+          }
+        },
+        {
+          "name": "q-layout",
+          "source": {
+            "module": "quasar",
+            "symbol": "QLayout"
+          }
+        },
+        {
+          "name": "q-header",
+          "source": {
+            "module": "quasar",
+            "symbol": "QHeader"
+          }
+        },
+        {
+          "name": "q-footer",
+          "source": {
+            "module": "quasar",
+            "symbol": "QFooter"
+          }
+        },
+        {
+          "name": "q-toolbar",
+          "source": {
+            "module": "quasar",
+            "symbol": "QToolbar"
+          }
+        },
+        {
+          "name": "q-toolbar-title",
+          "source": {
+            "module": "quasar",
+            "symbol": "QToolbarTitle"
+          }
+        },
+        {
+          "name": "q-btn",
+          "source": {
+            "module": "quasar",
+            "symbol": "QBtn"
+          }
+        },
+        {
+          "name": "q-input",
+          "source": {
+            "module": "quasar",
+            "symbol": "QInput"
+          }
+        },
+        {
+          "name": "q-form",
+          "source": {
+            "module": "quasar",
+            "symbol": "QForm"
+          }
+        },
+        {
+          "name": "q-page-container",
+          "source": {
+            "module": "quasar",
+            "symbol": "QPageContainer"
+          }
+        },
+        {
+          "name": "q-tooltip",
+          "source": {
+            "module": "quasar",
+            "symbol": "QTooltip"
+          }
+        },
+        {
+          "name": "q-icon",
+          "source": {
+            "module": "quasar",
+            "symbol": "QIcon"
+          }
+        },
+        {
+          "name": "q-list",
+          "source": {
+            "module": "quasar",
+            "symbol": "QList"
+          }
+        },
+        {
+          "name": "q-item",
+          "source": {
+            "module": "quasar",
+            "symbol": "QItem"
+          }
+        },
+        {
+          "name": "q-item-section",
+          "source": {
+            "module": "quasar",
+            "symbol": "QItemSection"
+          }
+        },
+        {
+          "name": "q-item-label",
+          "source": {
+            "module": "quasar",
+            "symbol": "QItemLabel"
+          }
+        },
+        {
+          "name": "q-separator",
+          "source": {
+            "module": "quasar",
+            "symbol": "QSeparator"
+          }
+        },
+        {
+          "name": "q-space",
+          "source": {
+            "module": "quasar",
+            "symbol": "QSpace"
+          }
+        },
+        {
+          "name": "q-drawer",
+          "source": {
+            "module": "quasar",
+            "symbol": "QDrawer"
+          }
+        },
+        {
+          "name": "q-dialog",
+          "source": {
+            "module": "quasar",
+            "symbol": "QDialog"
+          }
+        },
+        {
+          "name": "q-menu",
+          "source": {
+            "module": "quasar",
+            "symbol": "QMenu"
+          }
+        },
+        {
+          "name": "q-select",
+          "source": {
+            "module": "quasar",
+            "symbol": "QSelect"
+          }
+        },
+        {
+          "name": "q-table",
+          "source": {
+            "module": "quasar",
+            "symbol": "QTable"
+          }
+        },
+        {
+          "name": "q-tabs",
+          "source": {
+            "module": "quasar",
+            "symbol": "QTabs"
+          }
+        },
+        {
+          "name": "q-tab",
+          "source": {
+            "module": "quasar",
+            "symbol": "QTab"
+          }
+        },
+        {
+          "name": "q-tab-panels",
+          "source": {
+            "module": "quasar",
+            "symbol": "QTabPanels"
+          }
+        },
+        {
+          "name": "q-tab-panel",
+          "source": {
+            "module": "quasar",
+            "symbol": "QTabPanel"
+          }
+        }
+      ]
+    }
+  }
+}

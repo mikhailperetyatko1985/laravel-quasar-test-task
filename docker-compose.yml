@@ -1,0 +1,155 @@
+services:
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    container_name: laravel_mysql
+    restart: unless-stopped
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/logs:/var/log/mysql
+      - ./mysql:/tmp/mysql-env
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  memcached:
+    image: memcached:1.6-alpine
+    container_name: laravel_memcached
+    restart: unless-stopped
+    command: memcached -m 128
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "11211"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: laravel_api
+    restart: unless-stopped
+    volumes:
+      - ./api:/var/www/html
+      - ./api/logs:/var/www/html/storage/logs
+    networks:
+      - app-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+      memcached:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "php-fpm-healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: quasar_frontend
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+      - ./frontend/logs:/app/logs
+    networks:
+      - app-network
+    depends_on:
+      - api
+    command: sh -c "npm run build && npm run serve"
+    environment:
+      - NODE_ENV=production
+      - API_URL=https://${SERVER_IP:-78.140.243.138}:443
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: laravel_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+      - ./api:/var/www/html
+    networks:
+      - app-network
+    depends_on:
+      - api
+      - frontend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  certbot:
+    image: certbot/certbot
+    container_name: laravel_certbot
+    restart: unless-stopped
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/logs:/var/log/letsencrypt
+      - ./certbot/entrypoint.sh:/entrypoint.sh:ro
+    entrypoint: ["/bin/sh", "/entrypoint.sh"]
+    environment:
+      - SSL_MODE=ip
+      - SERVER_IP=78.140.243.138
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL:-admin@example.com}
+      - AUTO_INIT_SSL=yes
+    networks:
+      - app-network
+    depends_on:
+      - nginx
+    healthcheck:
+      test: ["CMD", "certbot", "certificates"]
+      interval: 6h
+      timeout: 10s
+      retries: 1
+      start_period: 30s
+
+  yandex-parser:
+    build:
+      context: ./yandex-parser
+      dockerfile: Dockerfile
+    container_name: yandex_parser
+    restart: unless-stopped
+    networks:
+      - app-network
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local

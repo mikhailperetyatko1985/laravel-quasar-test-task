@@ -1,0 +1,37 @@
+# Development конфигурация Docker Compose
+# Использование: docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+services:
+  nginx:
+    # Для разработки используем нестандартные порты
+    ports:
+      - "8095:80"
+      - "8096:443"
+
+  certbot:
+    # Для разработки используем самоподписанные сертификаты
+    environment:
+      - SSL_MODE=self-signed
+      - SERVER_IP=${SERVER_IP:-}
+      - SERVER_DOMAIN=${SERVER_DOMAIN:-}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL:-}
+      - AUTO_INIT_SSL=yes
+
+  frontend:
+    # Монтируем исходники для live reload и видимости node_modules локально
+    volumes:
+      - ./frontend:/app
+    # Пробрасываем порт для WebSocket HMR
+    ports:
+      - "9000:9000"
+    # НЕ переопределяем команду - используем entrypoint
+    # command определяется в Dockerfile
+    environment:
+      - NODE_ENV=development
+      - VITE_HMR_PROTOCOL=ws
+      - VITE_HMR_HOST=localhost
+      - VITE_HMR_PORT=9000
+      - VITE_HMR_CLIENT_PORT=9000
+      - CHOKIDAR_USEPOLLING=true
+      - API_URL=http://api:9000
+    command: sh -c "npm install && npm run dev"

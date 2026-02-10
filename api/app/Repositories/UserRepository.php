@@ -1,0 +1,41 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Repositories;
+
+use App\DTO\Auth\RegisterDto;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class UserRepository
+{
+    public function create(RegisterDto $dto): User
+    {
+        return User::create([
+            'name' => $dto->name,
+            'email' => $dto->email,
+            'password' => Hash::make($dto->password),
+        ]);
+    }
+
+    public function findByEmail(string $email): ?User
+    {
+        return User::where('email', $email)->first();
+    }
+
+    public function findById(int $id): ?User
+    {
+        return User::find($id);
+    }
+
+    public function update(User $user, array $data): bool
+    {
+        return $user->update($data);
+    }
+
+    public function delete(User $user): bool
+    {
+        return $user->delete() ?? false;
+    }
+}
